@@ -223,6 +223,7 @@ def resize_array(labels, image, ct):
             pred_sitk = sitk.Resample(pred_sitk, ct, sitk.Transform(), sitk.sitkNearestNeighbor, 0, ct.GetPixelID())
             aorta_ol = sitk.GetArrayFromImage(pred_sitk)
             aorta_ol = aorta_ol.astype(np.uint8)
+            labels2 = labels2.astype(np.uint8)
             aorta_ml = labels2[:,:,:,0] + labels2[:,:,:,1] + labels2[:,:,:,2] + labels2[:,:,:,3]
             aorta_ml = aorta_ml.astype(np.uint8)
             added_voxel_indices = np.transpose(np.nonzero(aorta_ol & ~aorta_ml))
