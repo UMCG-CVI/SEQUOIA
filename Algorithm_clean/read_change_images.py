@@ -235,10 +235,12 @@ def resize_array(labels, image, ct):
                 # Find the indices of the non-zero voxels in the current label
                 try:
                     label_indices = np.transpose(np.nonzero(labels[:, :, :, i]))
+                    # Calculate the distances between the added voxels and the non-zero voxels in the current label
+                    label_distances = cdist(added_voxel_indices, label_indices, metric='euclidean')
                 except:
                     label_indices = np.transpose(np.nonzero(labels[:, :, ::2, i]))
-                # Calculate the distances between the added voxels and the non-zero voxels in the current label
-                label_distances = cdist(added_voxel_indices, label_indices, metric='euclidean')
+                    # Calculate the distances between the added voxels and the non-zero voxels in the current label
+                    label_distances = cdist(added_voxel_indices, label_indices, metric='euclidean')
                 # Take the minimum distance for each added voxel and store it in the distances array
                 distances[:, i] = np.min(label_distances, axis=1)
 
@@ -270,10 +272,13 @@ def closing(labels):
         # Find the indices of the non-zero voxels in the current label
         try:
             label_indices = np.transpose(np.nonzero(labels[:, :, :, i]))
+            # Calculate the distances between the added voxels and the non-zero voxels in the current label
+            label_distances = cdist(added_voxel_indices, label_indices, metric='euclidean')
         except:
             label_indices = np.transpose(np.nonzero(labels[:, :, ::2, i]))
-        # Calculate the distances between the added voxels and the non-zero voxels in the current label
-        label_distances = cdist(added_voxel_indices, label_indices, metric='euclidean')
+            # Calculate the distances between the added voxels and the non-zero voxels in the current label
+            label_distances = cdist(added_voxel_indices, label_indices, metric='euclidean')
+        
         # Take the minimum distance for each added voxel and store it in the distances array
         distances[:, i] = np.min(label_distances, axis=1)
 
