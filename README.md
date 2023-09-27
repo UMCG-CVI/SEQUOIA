@@ -13,9 +13,9 @@ citation!
 > Note: This is not a medical device and not intended for clinical usage. 
 
 ## Folder structure
-'''
 
-Data/
+```
+Data_folder
 ├── PT1
 │   └── CT_pt1.nii
 │   └── PET_pt1.nii (optional)
@@ -26,7 +26,53 @@ Data/
 │   └── CT_pt3.nii
 │   └── PET_pt3.nii (optional)
 ├── Etc...
+```
 
-'''
+The output will look like:
+```
+Data_folder
+├── PT1
+│   └── Output_folder
+│       └── abd_aorta.nii
+│       └── aorta.nii
+│       └── aorta_combined.nii
+│       └── arc_aorta.nii
+│       └── asc_aorta.nii
+│       └── asc_background.nii
+│       └── data.csv
+│       └── des_aorta.nii
+│   └── CT_pt1.nii
+│   └── PET_pt1.nii (optional)
+├── PT2
+│   └── Output_folder
+│       └── abd_aorta.nii
+│       └── aorta.nii
+│       └── aorta_combined.nii
+│       └── arc_aorta.nii
+│       └── asc_aorta.nii
+│       └── asc_background.nii
+│       └── data.csv
+│       └── des_aorta.nii
+│   └── CT_pt2.nii
+│   └── PET_pt2.nii (optional)
+├── PT3
+│   └── Output_folder
+│       └── abd_aorta.nii
+│       └── aorta.nii
+│       └── aorta_combined.nii
+│       └── arc_aorta.nii
+│       └── asc_aorta.nii
+│       └── asc_background.nii
+│       └── data.csv
+│       └── des_aorta.nii
+│   └── CT_pt3.nii
+│   └── PET_pt3.nii (optional)
+├── Etc...
+├── data.csv
+```
+Where abd = abdominal, arc = arch, asc = ascending, des = descending, aorta is the full aorta as one label, aorta_combined is the full aorta with four labels, and asc_background is the volume of interest in which the background measurements are done.
+Per patient, a csv file is generated containing the SUV<sub>mean</sub>, SUV<sub>max</sub>, SUV<sub>peak</sub>, SUV<sub>sum</sub>, volume of the label, Agatston score, calcium volume, and calcium mass score per label.
+Additionally, a data.csv file is generated in the main data folder with all data from every patient in the folder for easier comparisons.
+
 
 ## How to use
