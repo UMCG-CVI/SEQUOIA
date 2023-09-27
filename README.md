@@ -10,6 +10,10 @@ A CT scan can be used as input in niftii format. Based on this, the segmentation
 Please cite our article when you use SEQUOIA:
 citation!
 
-Folder structure
+> Note: This is not a medical device and not intended for clinical usage. 
 
-How to use
+## Folder structure
+
+
+
+## How to use
