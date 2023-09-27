@@ -1,6 +1,8 @@
 # SEQUOIA
 automated multiclass SEgmentation, QUantification, and visualizatiOn of the dIseased Aorta on hybrid PET/CT
 
+[SEQUOIA_logo.pdf](https://github.com/gvpraagh/SEQUOIA/files/12738716/SEQUOIA_logo.pdf)
+
 
 SEQUOIA is an automated pipeline for aortic PET/CT studies. First, it segments the ascending aorta, aortic arch, descending aorta, and abdominal aorta on low-dose CT from PET/CT. The multiclass segmentation is done using a 3D U-Net. Moreover, SEQUOIA provides tracer uptake values, calcium scores, background measurements, radiomic features, and a 2D visualization of the calcium and tracer distribution.
 
