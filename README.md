@@ -1,7 +1,7 @@
 # SEQUOIA
 automated multiclass SEgmentation, QUantification, and visualizatiOn of the dIseased Aorta on hybrid PET/CT
 
-![Logo](https://github.com/gvpraagh/SEQUOIA/tree/main/Images/SEQUOIA_logo.pdf)
+![Logo](https://github.com/gvpraagh/SEQUOIA/tree/main/Images/SEQUOIA_logo.jpg)
 
 <img src="https://github.com/gvpraagh/SEQUOIA/tree/main/Images/SEQUOIA_logo.jpg" width="128"/>
 
