@@ -13,7 +13,20 @@ citation!
 > Note: This is not a medical device and not intended for clinical usage. 
 
 ## Folder structure
+'''
 
+Data/
+├── PT1
+│   └── CT_pt1.nii
+│   └── PET_pt1.nii (optional)
+├── PT2
+│   └── CT_pt2.nii
+│   └── PET_pt2.nii (optional)
+├── PT3
+│   └── CT_pt3.nii
+│   └── PET_pt3.nii (optional)
+├── Etc...
 
+'''
 
 ## How to use
