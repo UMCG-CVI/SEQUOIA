@@ -110,3 +110,7 @@ python segmentation.py --data_dir "your\directory\here" --speed "fast"
 You can also change the default settings in the _opts.py_ file. After that you can just run the _segmentations.py_ file.
 
 > Note: do NOT change the last six arguments as these are settings for the model
+
+
+### Acknowlegdements
+We have used the Hausdorff distance from: https://github.com/google-deepmind/surface-distance/tree/master
