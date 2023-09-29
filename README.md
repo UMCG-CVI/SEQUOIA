@@ -111,6 +111,9 @@ You can also change the default settings in the _opts.py_ file. After that you c
 
 > Note: do NOT change the last six arguments as these are settings for the model
 
+## Visualization tool
+If you would like to see an example of the output of our visualization tool, go to the Images map. It contains two .html files that open an interactive ParaView Glance tool. Here you see an example of the CT calcium distribution and PET tracer distribution meshes given as output of the visualization tool.
+
 
 ### Acknowlegdements
 We have used the Hausdorff distance from: https://github.com/google-deepmind/surface-distance/tree/master
