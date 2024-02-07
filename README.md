@@ -100,6 +100,8 @@ pymeshfix == 0.16.2
 meshio == 5.3.4
 pyradiomics == 3.0.1
 ```
+Or see the requirements.txt file in the main folder.
+
 
 Then just run the program by:
 ```
