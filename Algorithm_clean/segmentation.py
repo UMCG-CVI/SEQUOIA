@@ -38,6 +38,7 @@ from get_mesh import mesh_analysis
 
 def evaluate():
     """evaluate the UNet model by stepwise moving along the 3D image"""
+    print("Please cite our article when you use SEQUOIA: van Praagh GD, Nienhuis PH, Reijrink M, et al. Automated multiclass segmentation, quantification, and visualization of the diseased aorta on hybrid PET/CT–SEQUOIA. Med Phys. 2024; 1-14. https://doi.org/10.1002/mp.16967")
     model = get_unet(img_size=tuple(opt.img_size), num_channels=opt.num_channels, num_classes=opt.num_classes)
     
     # add clipnorm to optimizer to prevent nan values during training
@@ -277,6 +278,7 @@ def evaluate():
         # df = pd.DataFrame(times, columns=['prep_time', 'pred_time', 'calc_time', 'mesh_time'])
         # df.to_csv(os.path.join(opt.data_dir,'times.csv'))
         print(datetime.datetime.now() - begin_time)
+        print("Please cite our article when you use SEQUOIA: van Praagh GD, Nienhuis PH, Reijrink M, et al. Automated multiclass segmentation, quantification, and visualization of the diseased aorta on hybrid PET/CT–SEQUOIA. Med Phys. 2024; 1-14. https://doi.org/10.1002/mp.16967")
     
     return cases
 
