@@ -8,7 +8,9 @@ SEQUOIA is an automated pipeline for aortic PET/CT studies. First, it segments t
 A CT scan can be used as input in niftii format. Based on this, the segmentation, calcium scores, and background measurement will be done. If the corresponding PET scan is given in niftii format too, the tracer uptake values and background measurements in PET will be given too. Make sure the PET is converted to wanted value: e.g., standardised uptake values (SUV), SUV normalized to lean body mass (SUL).
 
 Please cite our article when you use SEQUOIA:
+
 van Praagh GD, Nienhuis PH, Reijrink M, et al. Automated multiclass segmentation, quantification, and visualization of the diseased aorta on hybrid PET/CT–SEQUOIA. Med Phys. 2024; 1-14. https://doi.org/10.1002/mp.16967
+
 https://aapm.onlinelibrary.wiley.com/doi/full/10.1002/mp.16967
 
 > Note: This is not a medical device and not intended for clinical usage. 
