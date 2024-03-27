@@ -23,22 +23,22 @@ Your folder structure should look like this:
 
 ```
 Data_folder
-├── PT1
-│   └── CT_pt1.nii
-│   └── PET_pt1.nii (optional)
-├── PT2
-│   └── CT_pt2.nii
-│   └── PET_pt2.nii (optional)
-├── PT3
-│   └── CT_pt3.nii
-│   └── PET_pt3.nii (optional)
+├── Patient1
+│   └── ct.nii
+│   └── pet.nii (optional)
+├── Patient2
+│   └── ct.nii
+│   └── pet.nii (optional)
+├── Patient3
+│   └── ct.nii
+│   └── pet.nii (optional)
 ├── Etc...
 ```
 
 The output will look like:
 ```
 Data_folder
-├── PT1
+├── Patient1
 │   └── Output_folder
 │       └── abd_aorta.nii
 │       └── aorta.nii
@@ -48,9 +48,9 @@ Data_folder
 │       └── asc_background.nii
 │       └── data.csv
 │       └── des_aorta.nii
-│   └── CT_pt1.nii
-│   └── PET_pt1.nii (optional)
-├── PT2
+│   └── ct.nii
+│   └── pet.nii (optional)
+├── Patient2
 │   └── Output_folder
 │       └── abd_aorta.nii
 │       └── aorta.nii
@@ -60,9 +60,9 @@ Data_folder
 │       └── asc_background.nii
 │       └── data.csv
 │       └── des_aorta.nii
-│   └── CT_pt2.nii
-│   └── PET_pt2.nii (optional)
-├── PT3
+│   └── ct.nii
+│   └── pet.nii (optional)
+├── Patient3
 │   └── Output_folder
 │       └── abd_aorta.nii
 │       └── aorta.nii
@@ -72,8 +72,8 @@ Data_folder
 │       └── asc_background.nii
 │       └── data.csv
 │       └── des_aorta.nii
-│   └── CT_pt3.nii
-│   └── PET_pt3.nii (optional)
+│   └── ct.nii
+│   └── pet.nii (optional)
 ├── Etc...
 ├── data.csv
 ```
