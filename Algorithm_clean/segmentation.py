@@ -53,7 +53,7 @@ def evaluate():
         column_list = []
         begin_time = datetime.datetime.now()
         print(path)
-        output_path = os.path.join(path,'output')
+        output_path = os.path.join(path,'output_SEQUOIA')
         if not os.path.exists(output_path):
             os.makedirs(output_path)
         
