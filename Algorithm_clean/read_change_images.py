@@ -345,3 +345,72 @@ def make_isotropic(image, interpolator=sitk.sitkLinear):
     return sitk.Resample(image, new_size, sitk.Transform(), interpolator,
                          image.GetOrigin(), new_spacing, image.GetDirection(), 0,
                          image.GetPixelID())
+
+
+def load_save_dicom(src_dir_pt, suv_bw=True, sul=False, suv_bsa=False, patient_height_in_m=None):
+    # Load DICOM series into an sitk object
+    # Uncomment image_array to get numpy arrays
+    def read_first_series_in_dir(path):
+        series_IDs = sitk.ImageSeriesReader.GetGDCMSeriesIDs(path)
+        if not series_IDs:
+            print("ERROR: given directory \"" + path +
+                    "\" does not contain a DICOM series.")
+        series_file_names = sitk.ImageSeriesReader.GetGDCMSeriesFileNames(path, series_IDs[0])
+        
+        series_reader = sitk.ImageSeriesReader()
+        series_reader.SetFileNames(series_file_names)
+        
+        return series_reader.Execute()
+    
+    def read_dicom_files(input_dicom_dir):
+        filenames = os.listdir(input_dicom_dir)
+        data=True
+        while data:
+            for filename in filenames:
+                try:
+                    dcm_dataset = pydicom.dcmread(os.path.join(input_dicom_dir, filename))
+                    data = False
+                    print("Valid DICOM: " + input_dicom_dir)
+                    break
+                except:
+                    print("Not a valid DICOM: " + input_dicom_dir)
+        return dcm_dataset
+    
+    
+    image_dirs = []
+    CT_found = False
+    for (dirpath, dirnames, filenames) in os.walk(src_dir_pt):
+        try:
+            dcm_dataset = pydicom.dcmread(os.path.join(dirpath, filenames[0]))
+            if dcm_dataset.Modality == 'CT':
+                ct_image = read_first_series_in_dir(dirpath)
+                sitk.WriteImage(ct_image, os.path.join(src_dir_pt, 'ct.nii.gz'))
+                CT_found = True
+            if CT_found:
+                break
+        except:
+            continue
+    
+    PET_found = False
+    for (dirpath, dirnames, filenames) in os.walk(src_dir_pt):
+        try:
+            dcm_dataset = pydicom.dcmread(os.path.join(dirpath, filenames[0]))    
+            if dcm_dataset.Modality == 'PT' or dcm_dataset.Modality == 'PET':
+                pet_image = read_first_series_in_dir(dirpath)
+    
+                # Resample PET to CT image as resolution of CT is higher
+                pet_image = sitk.Resample(pet_image, ct_image)
+                
+                dcm_dataset = read_dicom_files(os.path.join(src_dir_pt, dirpath))
+                suv_scaled_pet = convert_to_metric(dcm_dataset, pet_image, suv_bw=suv_bw, suv_bsa=suv_bsa, sul=sul, patient_height_in_m=patient_height_in_m)
+                sitk.WriteImage(suv_scaled_pet, os.path.join(src_dir_pt, 'pet.nii.gz'))
+                PET_found = True
+            if PET_found:
+                break
+        except:
+            continue
+    
+    if not PET_found:
+        suv_scaled_pet = []
+    
+    return ct_image, suv_scaled_pet, PET_found
