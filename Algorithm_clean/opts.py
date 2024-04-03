@@ -23,6 +23,7 @@ parser = argparse.ArgumentParser(description='Define prediction values of the ao
 parser.add_argument('--data_dir', type=str, default=r'...', help='where dataset saved. Within this folder, save every patient as different folder, with ct and pet images in that folder')
 parser.add_argument('--ct_filename', type=str, default='ct.nii.gz', help='filenames of the ct image')
 parser.add_argument('--pet_filename', type=str, default='pet.nii.gz', help='filenames of the pet image, choose "none" if no PET image is available')
+parser.add_argument('--cropping', type=bool, default=True, help='True if you do want to crop large CT files, False if you do not want to crop large CT files')
 parser.add_argument('--speed', type=str, default='accurate', help='choose "accurate", "medium", or "fast" (slower, but more accurate to less accurate, but quicker)')
 parser.add_argument('--calcium_threshold', type=str, default='standard', help='choose "standard" for 130 HU, "100kVp" to use 147HU for 100 kVp (Nakazato et al. JCCT 2009), or "SD" for mean background + 3 * SD background (Raggi et al. AJR 2002)')
 parser.add_argument('--per_calc', type=str, default=False, help='choose True if you want an analysis per calcification')
