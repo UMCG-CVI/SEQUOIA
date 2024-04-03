@@ -28,7 +28,7 @@ parser.add_argument('--speed', type=str, default='accurate', help='choose "accur
 parser.add_argument('--calcium_threshold', type=str, default='standard', help='choose "standard" for 130 HU, "100kVp" to use 147HU for 100 kVp (Nakazato et al. JCCT 2009), or "SD" for mean background + 3 * SD background (Raggi et al. AJR 2002)')
 parser.add_argument('--per_calc', type=str, default=False, help='choose True if you want an analysis per calcification')
 parser.add_argument('--pet_threshold', type=str, default='A50P', help='choose "number" for that specific SUV or "A50P" for the background adapted 50% SUV peak threshold')
-parser.add_argument('--meshes', type=bool, default=True, help='choose True if you want to get a heatmap of the calcium and pet hotspot distribution')
+parser.add_argument('--meshes', type=bool, default=False, help='choose True if you want to get a heatmap of the calcium and pet hotspot distribution')
 
 parser.add_argument('--radiomics', type=bool, default=False, help='choose True if you do want the radiomics features extracted')
 parser.add_argument('--radiomics_binwidth', type=float, default=0.5, help='choose your own bin width. 0.5 has shown to work well for PET imaging')
