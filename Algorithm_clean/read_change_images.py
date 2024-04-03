@@ -18,6 +18,8 @@ limitations under the License.
 """
 
 import SimpleITK as sitk
+import os
+import pydicom
 from opts import opt
 import numpy as np
 import cv2
@@ -25,7 +27,7 @@ from scipy.spatial.distance import cdist
 from scipy import ndimage
 from skimage.transform import resize
 from hausdorff import compute_surface_distances
-
+from convert_pet import convert_to_metric
 
 
 def read_image(path):
