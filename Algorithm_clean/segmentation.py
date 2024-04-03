@@ -58,20 +58,27 @@ def evaluate():
             os.makedirs(output_path)
         
         #get images
-        ct = read_image(os.path.join(path, opt.ct_filename))
-        spacing = ct.GetSpacing()
-        voxel_volume = spacing[0] * spacing[1] * spacing[2]
-        pet_available = True
-        if opt.pet_filename == 'none':
-            pet_available = False
-        else:
-            try:
-                pet = read_image(os.path.join(path, opt.pet_filename))
+        if not os.path.exists(os.path.join(path, opt.ct_filename)):
+            ct, pet, pet_available = load_save_dicom(path)
+            if pet_available:
                 pet.SetOrigin(ct.GetOrigin())
-                pet = sitk.Resample(pet, ct)
-            except RuntimeError:
-                pet_available = False
+                pet.SetDirection(ct.GetDirection())
+                pet.SetSpacing(ct.GetSpacing())
+            else:
                 print("PET filename cannot be found, software will continue without PET calculations")
+        else:
+            ct = read_image(os.path.join(path, opt.ct_filename))
+            if opt.pet_filename == 'none':
+                pet_available = False
+            else:
+                try:
+                    pet = read_image(os.path.join(path, opt.pet_filename))
+                    pet.SetOrigin(ct.GetOrigin())
+                    pet = sitk.Resample(pet, ct)
+                    pet_available = True
+                except RuntimeError:
+                    pet_available = False
+                    print("PET filename cannot be found, software will continue without PET calculations")
         
         image = change_spacing(ct, [0.9765625, 0.9765625, 1.5])
         image = center_crop(image)
