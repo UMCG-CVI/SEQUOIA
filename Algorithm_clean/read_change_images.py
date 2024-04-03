@@ -229,7 +229,6 @@ def resize_array(labels, image, ct):
             aorta_ml = labels2[:,:,:,0] + labels2[:,:,:,1] + labels2[:,:,:,2] + labels2[:,:,:,3]
             aorta_ml = aorta_ml.astype(np.uint8)
             added_voxel_indices = np.transpose(np.nonzero(aorta_ol & ~aorta_ml))
-            print(len(added_voxel_indices))
             # Initialize an empty numpy array to store the distances
             distances = np.zeros((len(added_voxel_indices), labels.shape[3]))
 
