@@ -80,6 +80,17 @@ def evaluate():
                     pet_available = False
                     print("PET filename cannot be found, software will continue without PET calculations")
         
+        spacing = ct.GetSpacing()
+        voxel_volume = spacing[0] * spacing[1] * spacing[2]
+        x,y,z = ct.GetSize()
+        if opt.cropping:
+            if z > 600:
+                output_size = (512,512,500)
+                index = [0,0,int(ct.GetSize()[2]-600)]
+                roiFilter = sitk.RegionOfInterestImageFilter()
+                roiFilter.SetSize(output_size)
+                roiFilter.SetIndex(index)
+                ct = roiFilter.Execute(ct)
         image = change_spacing(ct, [0.9765625, 0.9765625, 1.5])
         image = center_crop(image)
         image = normalization(image)
