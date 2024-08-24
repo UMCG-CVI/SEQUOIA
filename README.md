@@ -117,6 +117,13 @@ You can also change the default settings in the _opts.py_ file. After that you c
 
 > Note: do NOT change the last six arguments as these are settings for the model
 
+If you already have segmentations or when you had to manually adjust the segmentations, you can also run the 'only_quantification.py' file:
+```
+python only_quantification.py --data_dir "your\directory\here"
+```
+This could also be useful for combining segmentations from other models, such as [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) or [MOOSE](https://github.com/ENHANCE-PET/MOOSE).
+
+
 ## Visualization tool
 If you would like to see an example of the output of our visualization tool, go to the Images map. It contains two .html files that open an interactive ParaView Glance tool. Here you see an example of the CT calcium distribution and PET tracer distribution meshes given as output of the visualization tool.
 
