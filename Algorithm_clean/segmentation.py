@@ -90,8 +90,8 @@ def evaluate():
                 roiFilter = sitk.RegionOfInterestImageFilter()
                 roiFilter.SetSize(output_size)
                 roiFilter.SetIndex(index)
-                ct = roiFilter.Execute(ct)
-        image = change_spacing(ct, [0.9765625, 0.9765625, 1.5])
+                image = roiFilter.Execute(ct)
+        image = change_spacing(image, [0.9765625, 0.9765625, 1.5])
         image = center_crop(image)
         image = normalization(image)
         sample = {'image': [image]}
