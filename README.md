@@ -121,7 +121,6 @@ If you already have segmentations or when you had to manually adjust the segment
 ```
 python only_quantification.py --data_dir "your\directory\here"
 ```
-This could also be useful for combining segmentations from other models, such as [TotalSegmentator](https://github.com/wasserth/TotalSegmentator) or [MOOSE](https://github.com/ENHANCE-PET/MOOSE).
 
 
 ## Visualization tool
