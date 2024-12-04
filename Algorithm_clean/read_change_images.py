@@ -2,7 +2,7 @@
 SEQUOIA - automated multiclass SEgmentation, QUantification, and visualizatiOn of the dIseased Aorta on hybrid PET/CT
 
 
-Copyright 2023 GD van Praagh
+Copyright 2023 University Medical Center Groningen
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -83,34 +83,35 @@ def crop_image_to_label(main_image, label):
 
     if labelFilter.GetNumberOfLabels() == 1:
         print("Error: There are no labels")
-    elif labelFilter.GetNumberOfLabels() == 2:
-        selectedBbox = labelShapeFilter.GetBoundingBox(1)
-    else: #if there are more labels, first find the min and max of x,y,z and then create 1 boundingbox of all labels together
-        Bbox = list(labelFilter.GetBoundingBox(1))
-        for i in range(2,labelFilter.GetNumberOfLabels()):
-            Bbox2 = list(labelFilter.GetBoundingBox(i))
-            for nr in range(len(Bbox)):
-                if nr % 2 == 0 and Bbox2[nr] < Bbox[nr]:
-                    Bbox[nr] = Bbox2[nr]
-                elif nr % 2 != 0 and Bbox2[nr] > Bbox[nr]:
-                    Bbox[nr] = Bbox2[nr]
-        selectedBbox = [Bbox[0], Bbox[2], Bbox[4], Bbox[1]-Bbox[0]+1, Bbox[3]-Bbox[2]+1, Bbox[5]-Bbox[4]+1]
+    else:
+        if labelFilter.GetNumberOfLabels() == 2:
+            selectedBbox = labelShapeFilter.GetBoundingBox(1)
+        else: #if there are more labels, first find the min and max of x,y,z and then create 1 boundingbox of all labels together
+            Bbox = list(labelFilter.GetBoundingBox(1))
+            for i in range(2,labelFilter.GetNumberOfLabels()):
+                Bbox2 = list(labelFilter.GetBoundingBox(i))
+                for nr in range(len(Bbox)):
+                    if nr % 2 == 0 and Bbox2[nr] < Bbox[nr]:
+                        Bbox[nr] = Bbox2[nr]
+                    elif nr % 2 != 0 and Bbox2[nr] > Bbox[nr]:
+                        Bbox[nr] = Bbox2[nr]
+            selectedBbox = [Bbox[0], Bbox[2], Bbox[4], Bbox[1]-Bbox[0]+1, Bbox[3]-Bbox[2]+1, Bbox[5]-Bbox[4]+1]
             
-    roiFilter = sitk.RegionOfInterestImageFilter()
-    roiFilter.SetSize(selectedBbox[3:])
-    roiFilter.SetIndex(selectedBbox[:3])
+        roiFilter = sitk.RegionOfInterestImageFilter()
+        roiFilter.SetSize(selectedBbox[3:])
+        roiFilter.SetIndex(selectedBbox[:3])
+        
+        cropped_main = roiFilter.Execute(main_image)
+        cropped_main.SetSpacing(main_image.GetSpacing())
+        cropped_main.SetDirection(main_image.GetDirection())
+        cropped_main.SetOrigin(main_image.GetOrigin())
+        
+        cropped_label = roiFilter.Execute(label)
+        cropped_label.SetSpacing(main_image.GetSpacing())
+        cropped_label.SetDirection(main_image.GetDirection())
+        cropped_label.SetOrigin(main_image.GetOrigin())
     
-    cropped_main = roiFilter.Execute(main_image)
-    cropped_main.SetSpacing(main_image.GetSpacing())
-    cropped_main.SetDirection(main_image.GetDirection())
-    cropped_main.SetOrigin(main_image.GetOrigin())
-    
-    cropped_label = roiFilter.Execute(label)
-    cropped_label.SetSpacing(main_image.GetSpacing())
-    cropped_label.SetDirection(main_image.GetDirection())
-    cropped_label.SetOrigin(main_image.GetOrigin())
-    
-    return cropped_main, cropped_label
+        return cropped_main, cropped_label
 
 
 def center_crop(image):
@@ -296,11 +297,10 @@ def closing(labels):
 
 def remove_small_regions(image, min_size, spacing):
     labels, num_features = ndimage.label(image)
-    if num_features > 1:
-        for i in range(1, num_features+1):
-            region_size = np.count_nonzero(labels == i)
-            if region_size < min_size:
-                labels[labels == i] = 0
+    for i in range(1, num_features+1):
+        region_size = np.count_nonzero(labels == i)
+        if region_size < min_size:
+            labels[labels == i] = 0
     labels[labels > 0] = 1
 
     lab_array, num_features = ndimage.label(labels)
