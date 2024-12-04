@@ -3,7 +3,7 @@
 SEQUOIA - automated multiclass SEgmentation, QUantification, and visualizatiOn of the dIseased Aorta on hybrid PET/CT
 
 
-Copyright 2023 GD van Praagh
+Copyright 2023 University Medical Center Groningen
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
